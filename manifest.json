@@ -1,0 +1,36 @@
+{
+   "name":"Simple Admin",
+   "description":"This is an extension designed to make searching the SCCRM database more intuitive.",
+   "version":"1.23",
+   "manifest_version":2,
+   "permissions":[
+      "storage",
+      "tabs",
+      "activeTab"
+   ],
+   "background":{
+      "scripts":[
+         "js/background.js"
+      ],
+      "persistent":false
+   },
+   "browser_action":{
+      "default_popup" : "app.html",
+	     "default_icon": {
+        "16": "img/icons/icon16.png",
+        "48": "img/icons/icon48.png",
+        "128": "img/icons/icon128.png"
+      }
+   },
+   "content_scripts":[
+      {
+         "matches":[
+		 	      "*://admin.simplechurchcrm.com/*"
+         ],
+         "js":[
+            "js/content.js"
+         ],
+         "run_at":"document_idle"
+      }
+   ]
+}

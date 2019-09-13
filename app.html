@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Admin</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/include/gf-montserrat.css">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/include/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+	<body>
+        <div class='container'>
+            <!-- Title & Version -->
+            <div class='container' id="ext-info">
+                <!--<img src='icon48.png' id='icon48'>-->
+                <h1> Simple Admin </h1>
+                <p id="ext-version">version 1.23</p>
+            </div>
+            <!-- Main Alert -->
+            <div id="alert-main" class="alert alert-success collapse" role="alert">
+                <!-- popup.js contains a function that handles this alert and it changes the innerText of the alert-main element
+        before showing the alert. Should the function not change the innerText or the element be accessed directly outside
+        of the function-this is what the user will see by default. -->
+                <p> ALERT_MESSAGE_DEFAULT </p>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab Links (should these be wrapped in a div?) -->
+            <ul class="nav nav-tabs" id="tab-links" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="search-tab" data-toggle="tab" role="tab" href="#search" aria-controls="search" aria-selected="true"> Search </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tools-tab" data-toggle="tab" role="tab" href="#tools" aria-controls="tools" aria-selected="false"> Tools </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="account-tab" data-toggle="tab" role="tab" href="#account" aria-controls="account" aria-selected="false"> Account </a>
+                </li>
+            </ul>
+            <!-- Tab Section -->
+            <div class="tab-content">
+                <!-- Search Tab -->
+                <div id="search" class="tab-pane fade in show active">
+                    <div class='form-group'>
+                        <div class='form-group'>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <!-- Header Selection Dropdown -->
+                                    <button class="btn btn-outline-secondary dropdown-toggle" id="select-header" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Domain</button>
+                                    <div class="dropdown-menu" id="dropdown-header">
+                                        <a class="dropdown-item" href="#">Domain</a>
+                                        <a class="dropdown-item" href="#">Name</a>
+                                        <a class="dropdown-item" href="#">Email</a>
+                                        <a class="dropdown-item" href="#">ID</a>
+                                    </div>
+                                </div>
+                                <!-- Search Input -->
+                                <input type="text" id="text-key" placeholder="Start typing.." class="form-control" aria-label="Key Input">
+                            </div>
+                        </div>
+                        <!-- Search Results Table -->
+                        <div class='form-group'>
+                            <table class="table" id='table-instances'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col' id='tableHeadMeta'></th>
+                                        <th scope='col'>Name</th>
+                                        <th scope='col'>Domain</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tools Tab -->
+                <div id="tools" class="tab-pane fade">
+                    <ul class="list-group" id="scripts">
+                        <a class="list-group-item list-group-item-action" data-surl="/internal/delete_all_members" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Flush search index
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-surl="/internal/import_all_members" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Re-index search
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-surl="/members/fixduplicatefamily" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Fix duplicate families
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-surl="/members/asscociate_gifts_with_pledges" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Associate giving with pledges
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-surl="/internal/fixlastattendeddate" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Fix last attended date
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-surl="/internal/find_duplicates" href="#">
+                            <i class="fas fa-sync-alt fa-spin disabled"></i>
+                            Find duplicates
+                        </a>
+                    </ul>
+                </div>
+                <div id="account" class="tab-pane fade">
+                    <div class="container">
+                        <h1 id="account-church-name"></h1>
+                        <!--<img id="brandImage" style="width: 150px; height: 75px" /> -->
+                        <nav id="account-tab-links" class="nav nav-pills nav-justified">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#internal">Internal</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#billing">Billing</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#flags">Flags</a>
+                        </nav>
+                        <div id="account-tab-group" class="tab-content">
+                            <div id="internal" class="tab-pane fade in show active">
+                                <!-- Internal -->
+                                <form>
+                                    <div class="form-group">
+                                        <label for="inputContactName">Name:</label>
+                                        <input type="text" class="form-control" id="inputContactName" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPhoneNumber">Phone:</label>
+                                        <input type="text" class="form-control" id="inputPhoneNumber" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputChurchOfficeId">Church Office Online ID:</label>
+                                        <input type="text" class="form-control" id="inputChurchOfficeId" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputShelbyDomain">ShelbyFinancials Domain:</label>
+                                        <input type="text" class="form-control" id="inputShelbyDomain" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputShelbyLabel">ShelbyFinancials Label:</label>
+                                        <input type="text" class="form-control" id="inputShelbyLabel" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputGivingId">Giving ID:</label>
+                                        <small><a id="givingLink" target="_blank" href="">View account</a></small>
+                                        <input type="text" class="form-control" id="inputGivingId" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputInternalId">Internal ID:</label>
+                                        <input type="text" class="form-control" id="inputInternalId" readonly />
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="billing" class="tab-pane fade">
+                                <!-- Billing -->
+                                <form>
+                                    <div class="form-group">
+                                        <label for="inputPricingModel">Pricing Model:</label>
+                                        <input type="text" class="form-control" id="inputPricingModel" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPricingTier">Pricing Tier:</label>
+                                        <input type="text" class="form-control" id="inputPricingTier" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPrice">Price:</label>
+                                        <input type="text" class="form-control" id="inputPrice" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputNotes">Notes:</label>
+                                        <input type="text" class="form-control" id="inputNotes" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputReviewDate">Review Date:</label>
+                                        <input type="text" class="form-control" id="inputReviewDate" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputFrequency">Frequency:</label>
+                                        <input type="text" class="form-control" id="inputFrequency" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPaymentMethod">Payment Method:</label>
+                                        <input type="text" class="form-control" id="inputPaymentMethod" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputStripeId">Stripe ID:</label>
+                                        <small><a id="stripeLink" target="_blank" href="#">View Profile</a></small>
+                                        <input type="text" class="form-control" id="inputStripeId" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputWHMCSId">WHMCS ID:</label>
+                                        <input type="text" class="form-control" id="inputWHMCSId" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSalesAgent">Sales Agent:</label>
+                                        <input type="text" class="form-control" id="inputSalesAgent" readonly />
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="flags" class="tab-pane fade">
+                                <!-- Flags -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputCRMEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="CRM" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputCalendarEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Calendar" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputFormsEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Forms" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputDashboardEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Dashboard" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputHighgroundsEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Highgrounds" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputBillingLockedEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Billing locked" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" id="inputActiveEnabled" disabled />
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Active" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- JS -->
+		<script src="js/include/jquery-3.3.1.min.js"></script>
+		<script src="js/include/popper.min.js"></script>
+		<script src="js/include/bootstrap.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>

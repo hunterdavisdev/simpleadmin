@@ -1,0 +1,186 @@
+html {
+	width: 425px;
+	height: 425px;
+}
+
+#ext-info h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 24px;
+	text-align: center;
+}
+
+h1 {
+	font-size: 18px;
+	padding-bottom: 15px;
+}
+
+#account-tab-links {
+	padding-bottom: 15px;
+	border-bottom: 2px solid;
+	border-color: rgba(35, 35, 35, 0.1);
+}
+
+#account-tab-group {
+	margin-top: 15px;
+}
+
+#ext-info p {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 8px;
+	text-align: center;
+}
+
+#icon48 {
+	width: 35px;
+	height: 35px;
+	margin-bottom: 5px;
+}
+
+#select-header {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+}
+
+#text-key {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+}
+
+#table-instances {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+	table-layout: fixed;
+	width: 100%;
+}
+
+#table-instances th,td {
+	font-size: 11px;
+	font-weight: 300;
+	word-wrap: break-word;
+}
+
+#ext-version {
+	text-align: center;
+	font-size: 0.375em;
+}	
+
+#ext-info {
+	margin-top: 25px;
+	margin-bottom: 12px;
+}
+
+#search div.form-group {
+	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#scripts {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+}
+
+#scripts a.disabled {
+	color: rgba(0,0,0,0.15);
+}
+
+#scripts a>i.fas.fa-sync-alt.fa-spin {
+	font-size: 15px;
+	margin-right: 5%;
+	color: gray;
+	
+}
+
+#scripts a>i.fas.fa-sync-alt.fa-spin.disabled {
+	display: none;
+}
+
+.nav-tabs>li>a {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+}
+
+div.container>div.row>div.col-sm-12{
+	padding-left: 70px;
+	padding-top: 20px;
+}
+
+#table-instances thead>tr>th {
+	border: 0px;
+}
+
+#dropdownMenuLink {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+	width: 100%;
+}
+
+#dropdownMenuItems {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+	width: 100%;
+}
+
+#dropdown-header {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+	width: 100%;
+}
+
+#tools-tab.disabled {
+	color: rgba(0,0,0,0.15);
+}
+
+#alert-main {
+    color: white;
+    background-color: #007bff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+#account {
+	padding-top: 10%;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.05em;
+}
+
+#tableHeadMeta {
+	width: 35px;
+}
+
+#exampleModalCenter {
+	font-size: 12px;
+	font-family: 'Montserrat', sans-serif; 
+}
+
+#exampleModalCenter h5 {
+	font-size: 15px;
+}
+
+i {
+	font-size: 17px;
+}
+
+#account input {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#table-instances td>a.status-3 {
+	color: red;
+}
