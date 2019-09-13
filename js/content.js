@@ -1,3 +1,7 @@
+import { Instance } from './modules/Instance';
+
+Instance.test();
+
 // header struct
 var headers = {
   id: 0,
@@ -17,7 +21,7 @@ var instances = [];
 
 function getInstances() {
   // return every row in the document
-  return document.getElementsByTagName("tr");
+  return document.getElementsByTagName('tr');
 }
 
 function queryInstances(header, key) {
@@ -35,24 +39,19 @@ function queryInstances(header, key) {
 
     // Name and Domain searches
     if (header === headers.name) {
-      var line = instances[t].children[
-        header
-      ].children[0].innerText.toUpperCase();
+      var line = instances[t].children[header].children[0].innerText.toUpperCase();
       if (line.indexOf(input) > -1) {
         var status3 = false;
 
         // add class-3 if it exists
-        if (instances[t].children[headers.name].className === "status-3")
-          status3 = true;
+        if (instances[t].children[headers.name].className === 'status-3') status3 = true;
 
         var returnarr = [
           instances[t].children[headers.id].innerText,
           instances[t].children[headers.name].children[0].innerText,
-          instances[t].children[headers.name].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.name].children[0].attributes['href'].value,
           instances[t].children[headers.domain].children[0].innerText,
-          instances[t].children[headers.domain].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.domain].children[0].attributes['href'].value,
           instances[t].children[headers.email].innerText,
           instances[t].children[headers.account_active].innerText,
           instances[t].children[headers.date_created].innerText,
@@ -67,24 +66,19 @@ function queryInstances(header, key) {
       }
       // ID searches
     } else if (header == headers.id || header == headers.domain) {
-      var line = instances[t].children[
-        header
-      ].children[0].innerText.toUpperCase();
+      var line = instances[t].children[header].children[0].innerText.toUpperCase();
       if (line == input) {
         var status3 = false;
 
         // add class-3 if it exists
-        if (instances[t].children[headers.name].className === "status-3")
-          status3 = true;
+        if (instances[t].children[headers.name].className === 'status-3') status3 = true;
 
         var returnarr = [
           instances[t].children[headers.id].innerText,
           instances[t].children[headers.name].children[0].innerText,
-          instances[t].children[headers.name].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.name].children[0].attributes['href'].value,
           instances[t].children[headers.domain].children[0].innerText,
-          instances[t].children[headers.domain].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.domain].children[0].attributes['href'].value,
           instances[t].children[headers.email].innerText,
           instances[t].children[headers.account_active].innerText,
           instances[t].children[headers.date_created].innerText,
@@ -103,17 +97,14 @@ function queryInstances(header, key) {
         var status3 = false;
 
         // add class-3 if it exists
-        if (instances[t].children[headers.name].className === "status-3")
-          status3 = true;
+        if (instances[t].children[headers.name].className === 'status-3') status3 = true;
 
         var returnarr = [
           instances[t].children[headers.id].innerText,
           instances[t].children[headers.name].children[0].innerText,
-          instances[t].children[headers.name].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.name].children[0].attributes['href'].value,
           instances[t].children[headers.domain].children[0].innerText,
-          instances[t].children[headers.domain].children[0].attributes["href"]
-            .value,
+          instances[t].children[headers.domain].children[0].attributes['href'].value,
           instances[t].children[headers.email].innerText,
           instances[t].children[headers.account_active].innerText,
           instances[t].children[headers.date_created].innerText,
@@ -137,12 +128,8 @@ instances = getInstances();
 function getAccountUrlFromDomain(domain) {
   if (instances && instances.length > 0) {
     for (var t = 1; t < instances.length; t++) {
-      if (
-        instances[t].children[headers.domain].children[0].innerText === domain
-      )
-        return instances[t].children[headers.name].children[0].attributes[
-          "href"
-        ].value;
+      if (instances[t].children[headers.domain].children[0].innerText === domain)
+        return instances[t].children[headers.name].children[0].attributes['href'].value;
     }
     return null;
   } else {
@@ -153,7 +140,7 @@ function getAccountUrlFromDomain(domain) {
 // listen for messages from popup.js
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch (request.type) {
-    case "searchRequest":
+    case 'searchRequest':
       // translate request.header for proper indexing
       var header_index = headers[request.header.toLowerCase()];
       // query for matching search results
@@ -164,24 +151,19 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({ results: search_results });
       }
       break;
-    case "urlRequest":
+    case 'urlRequest':
       if (request.domain) {
         var requestedUrl = getAccountUrlFromDomain(request.domain);
-        if (requestedUrl && requestedUrl.length > 0)
-          sendResponse({ results: requestedUrl });
-        else
-          console.log(
-            "URL Request Error: No URL's match the supplied domain: " +
-              request.domain
-          );
+        if (requestedUrl && requestedUrl.length > 0) sendResponse({ results: requestedUrl });
+        else console.log("URL Request Error: No URL's match the supplied domain: " + request.domain);
         sendResponse({ results: null });
       } else {
-        console.log("URL Request Error: domain is undefined.");
+        console.log('URL Request Error: domain is undefined.');
         sendResponse({ results: null });
       }
       break;
     default:
-      console.log("Error: unrecognized message type");
+      console.log('Error: unrecognized message type');
       break;
   }
 });

@@ -1,0 +1,26 @@
+{
+  "name": "simpleadmin",
+  "version": "1.0.0",
+  "description": "A chrome extension designed to make searching the SCCRM admin portal easier.",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel . -d build --ignore node_modules --copy-files --presets es2015 js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunterdavisdev/simpleadmin.git"
+  },
+  "author": "Hunter Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hunterdavisdev/simpleadmin/issues"
+  },
+  "homepage": "https://github.com/hunterdavisdev/simpleadmin#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^4.40.2"
+  }
+}
